@@ -1,12 +1,7 @@
 package main
 
-import "fmt"
-
 func main() {
-	x := 5
-	fmt.Println(&x)
+	server := NewAPIServer(":3030")
 
-	ptr := &x
-	fmt.Println(*ptr)
-	fmt.Println("Hello, World! sarasa")
+	server.Run()
 }

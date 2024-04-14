@@ -9,7 +9,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// server := NewAPIServer(":3030", store)
+	if err := store.Init(); err != nil {
+		log.Fatal(err)
+	}
 
-	// server.Run()
+	server := NewAPIServer(":3030", store)
+
+	server.Run()
 }

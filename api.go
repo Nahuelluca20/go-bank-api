@@ -37,11 +37,16 @@ func (s *APIServer) Run() {
 }
 
 func (s *APIServer) handleLogin(w http.ResponseWriter, r *http.Request) error {
+	if r.Method != "POST" {
+		return fmt.Errorf("method not allowed %s", r.Method)
+	}
+
 	var req LoginRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		return err
 	}
 
+	// se_
 	return WriteJSON(w, http.StatusOK, req)
 }
 
@@ -237,7 +242,7 @@ func getID(r *http.Request) (int, error) {
 	id, err := strconv.Atoi(idStr)
 
 	if err != nil {
-		return id, fmt.Errorf("invalid id given %s", id)
+		return id, fmt.Errorf("invalid id given %s", idStr)
 	}
 
 	return id, nil
